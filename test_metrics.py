@@ -25,3 +25,15 @@ def calculate_score():
 
 def test_score(min_score):
     assert calculate_score() >= min_score
+    
+
+#acc = clf.score(X_test, y_test)
+#print(acc)
+#with open("metrics.txt", "w") as outfile:
+#    outfile.write("Accuracy: " + str(acc) + "\n")
+
+# Plot it
+#disp = ConfusionMatrixDisplay.from_estimator(
+#    clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+#)
+#plt.savefig("plot.png")
