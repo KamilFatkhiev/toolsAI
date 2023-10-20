@@ -1,7 +1,7 @@
 import pytest
 import pickle
-from sklearn.metrics import r2_score
-
+from sklearn.metrics import r2_score, classification_report, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
 @pytest.fixture
 def min_score():
@@ -27,13 +27,17 @@ def test_score(min_score):
     assert calculate_score() >= min_score
     
 
-#acc = clf.score(X_test, y_test)
-#print(acc)
-#with open("metrics.txt", "w") as outfile:
-#    outfile.write("Accuracy: " + str(acc) + "\n")
-
-# Plot it
-#disp = ConfusionMatrixDisplay.from_estimator(
-#    clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues
-#)
-#plt.savefig("plot.png")
+def test_metrics():
+    
+    model, X_test, y_test = load()
+    acc = classification_report(y_test, model.predict(X_test))
+    
+    with open("metrics.txt", "w") as outfile:
+        outfile.write(acc)
+    
+    disp = ConfusionMatrixDisplay.from_estimator(
+        model, X_test, y_test, normalize="true", cmap=plt.cm.Blues
+    )
+    plt.savefig("plot.png")
+    
+    assert 1 == 1

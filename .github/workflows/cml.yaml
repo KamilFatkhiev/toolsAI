@@ -4,8 +4,8 @@
 name: Generate report using CML
 
 on:
-  push:
-    branches: [ "main" ]
+  push: 
+    branches: [ "add_cml" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -56,7 +56,8 @@ jobs:
     - name: Write CML report
       env:
         REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+      run: |
           # Post reports as comments in GitHub PRs
-          cat results.txt >> report.md
+          cat metrics.txt >> report.md
+          echo "![](./plot.png)" >> report.md
           cml comment create report.md
