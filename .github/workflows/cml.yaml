@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
-    - uses: iterative/setup-cml@v1
+    - uses: iterative/setup-cml@v2
     - name: Install dependencies, run, test with pytest and  write CML report
       run: |
           pip install -r requirements.txt
