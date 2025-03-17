@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout ode
+    - name: Checkout code
       uses: actions/checkout@v4
       
     - uses: actions/setup-python@v5
@@ -35,8 +35,11 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
-      
+    
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
     - uses: actions/download-artifact@v4
       with:
         name: dist
@@ -62,6 +65,13 @@ jobs:
     - name: Publish to PyPI
       run: |
         poetry publish --repository testpypi
+
+    - name: Sign the dists with Sigstore
+      uses: sigstore/gh-action-sigstore-python@v3.0.0
+      with:
+        inputs: >-
+          ./dist/*.tar.gz
+          ./dist/*.whl
 
     - name: Create GitHub Release
       env:
