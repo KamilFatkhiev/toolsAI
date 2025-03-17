@@ -1,4 +1,4 @@
-name: Publish Python Package
+name: Publish package and create release
 
 on:
   push:
@@ -42,12 +42,25 @@ jobs:
         name: dist
         path: dist/
 
-    - name: Publish to PyPI
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Configure Poetry
       env:
         POETRY_TEST_PYPI_TOKEN_PYPI: ${{ secrets.TEST_PYPI_TOKEN }}
       run: |
         poetry config pypi-token.testpypi $POETRY_TEST_PYPI_TOKEN_PYPI
         poetry config repositories.testpypi https://test.pypi.org/legacy/
+
+    - name: Publish to PyPI
+      run: |
         poetry publish --repository testpypi
 
     - name: Create GitHub Release
