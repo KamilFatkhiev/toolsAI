@@ -9,3 +9,7 @@ pandas = "*"
 numpy = "*"
 sklearn = "*"
 matplotlib = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
