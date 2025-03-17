@@ -7,7 +7,7 @@ description = "Study project"
 python = "^3.10"
 pandas = "*"
 numpy = "*"
-sklearn = "*"
+scikit-learn = "*"
 matplotlib = "*"
 
 [build-system]
