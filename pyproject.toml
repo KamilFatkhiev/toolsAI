@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "learn_cml"
+version = "0.0.1"
+description = "Study project"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas
+numpy
+sklearn
+matplotlib
